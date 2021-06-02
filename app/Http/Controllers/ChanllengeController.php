@@ -34,7 +34,7 @@ class ChanllengeController extends Controller
         ]);
         $chan->save();
 
-        return response()->json('The chanllenge successfully added');
+        return response()->json(['status'=>'success','message'=>'The chanllenge successfully added','data'=>$chan]);
     }
 
     // edit chanllenge
@@ -50,7 +50,7 @@ class ChanllengeController extends Controller
         $chan = Chanllenge::find($id);
         $chan->update($request->all());
 
-        return response()->json('The chanllenge successfully updated');
+        return response()->json(['status'=>'success','message'=>'The chanllenge successfully updated','data'=>$chan]);
     }
 
     // delete chanllenge

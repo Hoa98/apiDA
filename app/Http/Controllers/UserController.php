@@ -26,7 +26,7 @@ class UserController extends Controller
         return array_reverse($users);
     }
 
-    // add user
+    // add user -> add user_role
     public function create(Request $request)
     {
         if ($request->hasFile('avatar')) {
@@ -41,7 +41,7 @@ class UserController extends Controller
                 'avatar'=> $imageName
             ]);
             $user->save();
-            return response()->json('The user successfully added');
+            return response()->json(['status'=>'success','message'=>'The user successfully added','data'=>$user]);
         }
     }
 

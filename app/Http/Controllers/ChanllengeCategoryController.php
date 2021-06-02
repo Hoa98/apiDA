@@ -37,7 +37,7 @@ class ChanllengeCategoryController extends Controller
             'image'=>$imageName
         ]);
         $cate->save();
-        return response()->json('The category successfully added');
+        return response()->json(['status'=>'success','message'=>'The chanllenge category successfully added','data'=>$cate]);
     }
 
     // edit category
@@ -70,7 +70,7 @@ class ChanllengeCategoryController extends Controller
         $cate->image = $imageName;
         $cate->save();
 
-        return response()->json('The category successfully updated');
+        return response()->json(['status'=>'success','message'=>'The chanllenge category successfully updated','data'=>$cate]);
     }
 
     // delete category

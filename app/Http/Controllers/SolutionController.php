@@ -27,7 +27,7 @@ class SolutionController extends Controller
         ]);
         $solution->save();
 
-        return response()->json('The Solution successfully added');
+        return response()->json(['status'=>'success','message'=>'The solution successfully added','data'=>$solution]);
     }
 
     // edit Solution
@@ -43,7 +43,7 @@ class SolutionController extends Controller
         $solution = Solution::find($id);
         $solution->update($request->all());
 
-        return response()->json('The Solution successfully updated');
+        return response()->json(['status'=>'success','message'=>'The solution successfully updated','data'=>$solution]);
     }
 
     // delete Solution

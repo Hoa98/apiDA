@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,4 +47,12 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('{id}', [UserController::class, 'show'])->name('show.user');
     Route::post('update/{id}', [UserController::class, 'update'])->name('update.user');
     Route::delete('delete/{id}', [UserController::class, 'delete'])->name('delete.user');
+});
+
+Route::get('roles', [RoleController::class, 'index'])->name('roles');
+Route::group(['prefix' => 'role'], function () {
+    Route::post('add', [RoleController::class, 'create'])->name('create.role');
+    Route::get('{id}', [RoleController::class, 'show'])->name('show.role');
+    Route::post('update/{id}', [RoleController::class, 'update'])->name('update.role');
+    Route::delete('delete/{id}', [RoleController::class, 'delete'])->name('delete.role');
 });

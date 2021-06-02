@@ -25,7 +25,7 @@ class FeedbackController extends Controller
        ]);
        $feedback->save();
 
-       return response()->json('The feedback successfully added');
+       return response()->json(['status'=>'success','message'=>'The feedback successfully added','data'=>$feedback]);
    }
 
    // edit feedback
@@ -41,7 +41,7 @@ class FeedbackController extends Controller
        $feedback = Feedback::find($id);
        $feedback->update($request->all());
 
-       return response()->json('The feedback successfully updated');
+       return response()->json(['status'=>'success','message'=>'The feedback successfully updated','data'=>$feedback]);
    }
 
    // delete feedback
