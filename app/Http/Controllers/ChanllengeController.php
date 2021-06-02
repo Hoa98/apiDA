@@ -4,33 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Chanllenge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ChanllengeController extends Controller
 {
-    public function current(Request $request)
-    {
-        return response()->json($request->user());
-    }
-
     // all chanllenges
     public function index()
     {
-        $users = Chanllenge::all()->toArray();
-        return array_reverse($users);
+        $chans = Chanllenge::all()->toArray();
+        return array_reverse($chans);
     }
 
     // add chanllenge
     public function create(Request $request)
     {
-        $user = new Chanllenge([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'language' => $request->input('language'),
-            'link_figma' => $request->input('link_figma'),
-            'level' => $request->input('level'),
-            'cate_chanllen_id' => $request->input('cate_chanllen_id'),
+        $slug = Str::slug($request->name,'-');
+        $c = Chanllenge::where('slug','=', $slug)->first();
+        if($c){
+            $slug = $slug.Str::random(5);
+        }
+        $chan = new Chanllenge([
+            'title' => $request->title,
+            'slug' =>$slug,
+            'description' => $request->description,
+            'language' => $request->language,
+            'link_figma' => $request->link_figma,
+            'level' => $request->level,
+            'cate_chanllen_id' => $request->cate_chanllen_id,
         ]);
-        $user->save();
+        $chan->save();
 
         return response()->json('The chanllenge successfully added');
     }
@@ -38,15 +40,15 @@ class ChanllengeController extends Controller
     // edit chanllenge
     public function show($id)
     {
-        $user = Chanllenge::find($id);
-        return response()->json($user);
+        $chan = Chanllenge::find($id);
+        return response()->json($chan);
     }
 
     // update chanllenge
     public function update($id, Request $request)
     {
-        $user = Chanllenge::find($id);
-        $user->update($request->all());
+        $chan = Chanllenge::find($id);
+        $chan->update($request->all());
 
         return response()->json('The chanllenge successfully updated');
     }
@@ -54,8 +56,8 @@ class ChanllengeController extends Controller
     // delete chanllenge
     public function delete($id)
     {
-        $user = Chanllenge::find($id);
-        $user->delete();
+        $chan = Chanllenge::find($id);
+        $chan->delete();
 
         return response()->json('The chanllenge successfully deleted');
     }

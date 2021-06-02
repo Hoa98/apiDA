@@ -19,6 +19,7 @@ class CreateFeedbacksTable extends Migration
             $table->uuid('user_id');
             $table->uuid('solution_id');
             $table->integer('parent_id')->nullable()->default(0)->unsigned();
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
             $table->foreign('solution_id')->references('id')->on('solutions')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

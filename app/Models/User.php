@@ -57,7 +57,7 @@ class User extends Authenticatable
     {
         return vsprintf('https://www.gravatar.com/avatar/%s.jpg?s=200&d=%s', [
             md5(strtolower($this->email)),
-            $this->name ? urlencode("https://ui-avatars.com/api/$this->name") : 'mp',
+            $this->username ? urlencode("https://ui-avatars.com/api/$this->username") : 'mp',
         ]);
     } 
    

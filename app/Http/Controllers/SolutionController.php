@@ -7,30 +7,25 @@ use Illuminate\Http\Request;
 
 class SolutionController extends Controller
 {
-    public function current(Request $request)
-    {
-        return response()->json($request->user());
-    }
-
     // all Solutions
     public function index()
     {
-        $users = Solution::all()->toArray();
-        return array_reverse($users);
+        $solutions = Solution::all()->toArray();
+        return array_reverse($solutions);
     }
 
     // add Solution
     public function create(Request $request)
     {
-        $user = new Solution([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'link_github' => $request->input('link_github'),
-            'demo_url' => $request->input('demo_url'),
-            'user_id' => $request->input('user_id'),
-            'chanllen_id' => $request->input('chanllen_id'),
+        $solution = new Solution([
+            'title' => $request->title,
+            'description' => $request->description,
+            'link_github' => $request->link_github,
+            'demo_url' => $request->demo_url,
+            'user_id' => $request->user_id,
+            'chanllen_id' => $request->chanllen_id,
         ]);
-        $user->save();
+        $solution->save();
 
         return response()->json('The Solution successfully added');
     }
@@ -38,15 +33,15 @@ class SolutionController extends Controller
     // edit Solution
     public function show($id)
     {
-        $user = Solution::find($id);
-        return response()->json($user);
+        $solution = Solution::find($id);
+        return response()->json($solution);
     }
 
     // update Solution
     public function update($id, Request $request)
     {
-        $user = Solution::find($id);
-        $user->update($request->all());
+        $solution = Solution::find($id);
+        $solution->update($request->all());
 
         return response()->json('The Solution successfully updated');
     }
@@ -54,8 +49,8 @@ class SolutionController extends Controller
     // delete Solution
     public function delete($id)
     {
-        $user = Solution::find($id);
-        $user->delete();
+        $solution = Solution::find($id);
+        $solution->delete();
 
         return response()->json('The Solution successfully deleted');
     }
