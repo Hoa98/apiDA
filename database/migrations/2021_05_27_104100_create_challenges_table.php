@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChanllengesTable extends Migration
+class CreateChallengesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateChanllengesTable extends Migration
      */
     public function up()
     {
-        Schema::create('chanllenges', function (Blueprint $table) {
+        Schema::create('challenges', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
             $table->string('slug')->unique();
@@ -21,9 +21,9 @@ class CreateChanllengesTable extends Migration
             $table->string('language');
             $table->string('link_figma')->unique();
             $table->tinyInteger('level')->default(1);
-            $table->integer('cate_chanllen_id')->unsigned();
+            $table->integer('cate_challen_id')->unsigned();
             $table->timestamps();
-            $table->foreign('cate_chanllen_id')->references('id')->on('chanllenge_categories')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('cate_challen_id')->references('id')->on('challenge_categories')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -34,6 +34,6 @@ class CreateChanllengesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chanllenges');
+        Schema::dropIfExists('challenges');
     }
 }

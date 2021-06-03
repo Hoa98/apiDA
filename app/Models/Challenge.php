@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chanllenge extends Model
+class Challenge extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -14,7 +14,7 @@ class Chanllenge extends Model
         'language',
         'link_figma',
         'level',
-        'cate_chanllen_id'
+        'cate_challen_id'
     ];
 
 }

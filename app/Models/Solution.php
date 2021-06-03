@@ -18,7 +18,7 @@ class Solution extends Model
         'link_github',
         'demo_url',
         'user_id',
-        'chanllen_id'     
+        'challen_id'     
     ];
 
 }

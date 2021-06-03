@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChanllengeCategory;
+use App\Models\ChallengeCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class ChanllengeCategoryController extends Controller
+class ChallengeCategoryController extends Controller
 {
 
     // all categories
     public function index()
     {
-        $cates = ChanllengeCategory::all()->toArray();
+        $cates = ChallengeCategory::all()->toArray();
         return array_reverse($cates);
     }
 
@@ -20,7 +20,7 @@ class ChanllengeCategoryController extends Controller
     public function create(Request $request)
     {
         $slug = Str::slug($request->name,'-');
-        $c = ChanllengeCategory::where('slug','=', $slug)->first();
+        $c = ChallengeCategory::where('slug','=', $slug)->first();
         if($c){
             $slug = $slug.Str::random(5);
         }
@@ -30,27 +30,27 @@ class ChanllengeCategoryController extends Controller
            $request->image->move(public_path('files'),$image);
            $imageName = 'files/'.$image;
         }
-        $cate = new ChanllengeCategory([
+        $cate = new ChallengeCategory([
             'name' => $request->name,
             'slug' => $slug,
             'description' => $request->input('description'),
             'image'=>$imageName
         ]);
         $cate->save();
-        return response()->json(['status'=>'success','message'=>'The chanllenge category successfully added','data'=>$cate]);
+        return response()->json(['status'=>'success','message'=>'The challenge category successfully added','data'=>$cate]);
     }
 
     // edit category
     public function show($id)
     {
-        $cate = ChanllengeCategory::find($id);
+        $cate = ChallengeCategory::find($id);
         return response()->json($cate);
     }
 
     // update category
     public function update($id, Request $request)
     {
-        $cate = ChanllengeCategory::find($id);
+        $cate = ChallengeCategory::find($id);
         $imageName = '';
         if($request->hasFile('image')){
            $image = time().'-'.$request->image->getClientOriginalName();
@@ -58,7 +58,7 @@ class ChanllengeCategoryController extends Controller
            $imageName = 'files/'.$image;
         }
         $slug = Str::slug($request->name,'-');
-        $c = ChanllengeCategory::where('slug','=', $slug)
+        $c = ChallengeCategory::where('slug','=', $slug)
                      ->where('id','!=',$request->id)
                      ->first();
         if($c){
@@ -70,13 +70,13 @@ class ChanllengeCategoryController extends Controller
         $cate->image = $imageName;
         $cate->save();
 
-        return response()->json(['status'=>'success','message'=>'The chanllenge category successfully updated','data'=>$cate]);
+        return response()->json(['status'=>'success','message'=>'The challenge category successfully updated','data'=>$cate]);
     }
 
     // delete category
     public function delete($id)
     {
-        $cate = ChanllengeCategory::find($id);
+        $cate = ChallengeCategory::find($id);
         $cate->delete();
 
         return response()->json('The category successfully deleted');

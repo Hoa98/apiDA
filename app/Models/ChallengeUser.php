@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoleUser extends Model
+class ChallengeUser extends Model
 {
     use HasFactory;
-    private $fillable = ['user_id','role_id'];
+    private $fillable = ['user_id','challen_id'];
 }

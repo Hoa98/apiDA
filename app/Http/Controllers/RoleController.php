@@ -18,7 +18,7 @@ class RoleController extends Controller
     public function create(Request $request)
     {
         $role = new Role([
-            'permissions' => $request->permissions,
+            'name' => $request->name,
         ]);
         $role->save();
 

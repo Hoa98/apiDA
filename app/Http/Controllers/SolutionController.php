@@ -23,7 +23,7 @@ class SolutionController extends Controller
             'link_github' => $request->link_github,
             'demo_url' => $request->demo_url,
             'user_id' => $request->user_id,
-            'chanllen_id' => $request->chanllen_id,
+            'challen_id' => $request->challen_id,
         ]);
         $solution->save();
 

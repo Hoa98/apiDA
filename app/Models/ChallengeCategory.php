@@ -5,8 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class ChallengeCategory extends Model
 {
     use HasFactory;
-    private $fillable = ['name'];
+
+    protected $fillable = [
+        'name',
+        'image',
+        'description',
+    ];
+
 }
