@@ -22,34 +22,37 @@ class UserController extends Controller
     // all users
     public function index()
     {
-        $users = User::all()->toArray();
-        return array_reverse($users);
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list users',
+            'data' => User::all(),
+        ], 200);
     }
 
     // add user -> add user_role
     public function create(Request $request)
-    {
+    {       $imageName='';
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
             $images = time().'-'.$image->getClientOriginalName();
             $image->move(public_path('files'),$images);
             $imageName = 'files/'.$images;
-            $user = new User([
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'avatar'=> $imageName
-            ]);
-            $user->save();
-            return response()->json(['status'=>'success','message'=>'The user successfully added','data'=>$user]);
         }
+        $user = new User([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'avatar'=> $imageName
+        ]);
+        $user->save();
+        return response()->json(['status'=>'success','message'=>'The user successfully added','data'=>$user],201);
     }
 
     // edit user
     public function show($id)
     {
         $user = User::find($id);
-        return response()->json($user);
+        return response()->json(['status'=>'success','message'=>'Succsess get user','data'=>$user],200);
     }
 
     // update user
@@ -68,7 +71,10 @@ class UserController extends Controller
          $user->avatar = $imageName;
          $user->save();
 
-        return response()->json('The user successfully updated');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'The user successfully updated',
+        ], 200);
     }
 
     // delete user
@@ -77,6 +83,9 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return response()->json('The user successfully deleted');
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess delete user',
+        ], 200);
     }
 }
