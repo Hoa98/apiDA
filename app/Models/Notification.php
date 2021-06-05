@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory;
-    private $fillable = ['from_user_id','to_user_id','type','message','date','time','is_read'];
+    protected $fillable = ['from_user_id','to_user_id','type','message','date','time','is_read'];
 }
