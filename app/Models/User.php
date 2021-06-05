@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable,Uuid;
+    use HasFactory, Notifiable,Uuid, HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -50,9 +51,9 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
-        return $this->belongsToMany(Role::class,'user_roles');
-    }
+    // public function roles(){
+    //     return $this->belongsToMany(Role::class,'user_roles');
+    // }
     
     /**
      * Get the profile photo URL attribute.
