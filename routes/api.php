@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,23 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('logout', [LoginController::class, 'logout']);
-
-    Route::get('user', [UserController::class, 'current']);
+], function ($router) {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user', [AuthController::class, 'userProfile']);    
 });
+
+// Route::group(['middleware' => 'auth:api'], function () {
+//     Route::post('logout', [LoginController::class, 'logout']);
+
+//     Route::get('user', [UserController::class, 'current']);
+// });
 
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('login', [LoginController::class, 'login']);
