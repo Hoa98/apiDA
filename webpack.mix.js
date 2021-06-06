@@ -11,6 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.options({
+    hmrOptions: {
+        host: 'localhost',
+        port: '8079'
+    },
+});
+
+mix.webpackConfig({
+    devServer: {
+        port: '8079'
+    },
+});
+
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');

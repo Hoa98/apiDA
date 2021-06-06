@@ -21,6 +21,14 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/admin', function () {
+    return view('welcome');
+});
+Route::get('/', function () {
+    return view('home');
+});
+
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
