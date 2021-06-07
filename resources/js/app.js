@@ -1,32 +1,93 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+require("./bootstrap");
 
-require('./bootstrap');
+window.Vue = require("vue").default;
 
-window.Vue = require('vue').default;
+import Vue from "vue";
+import VueRouter from "vue-router";
+import CKEditor from "ckeditor4-vue";
+Vue.use(VueRouter);
+Vue.use(CKEditor);
+import Dashboard from "./components/Admin/Dashboard/Dashboard.vue";
+import Category from "./components/Admin/Category/Category.vue";
+import AddCategory from "./components/Admin/Category/AddCategory.vue";
+import EditCategory from "./components/Admin/Category/EditCategory.vue";
+import Chanllenge from "./components/Admin/Chanllenge/Chanllenge.vue";
+import AddChanllenge from "./components/Admin/Chanllenge/AddChanllenge.vue";
+import EditChanllenge from "./components/Admin/Chanllenge/EditChanllenge.vue";
+import Memtor from "./components/Admin/Memtor/Memtor.vue";
+import AddMemtor from "./components/Admin/Memtor/AddMemtor.vue";
+import EditMemtor from "./components/Admin/Memtor/EditMemtor.vue";
+import User from "./components/Admin/User/User.vue";
+import AddUser from "./components/Admin/User/AddUser.vue";
+import EditUser from "./components/Admin/User/EditUser.vue";
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+const routes = [
+    // -------------------Admin---------------
+    {
+        path: "/admin",
+        component: Dashboard,
+    },
+    // Dashboard
+    {
+        path: "/dashboard",
+        component: Dashboard
+    },
+    // User
+    {
+        path: "/user",
+        component: User
+    },
+    {
+        path: "/add-user",
+        component: AddUser
+    },
+    {
+        path: "/edit-user",
+        component: EditUser
+    },
+    // Memtor
+    {
+        path: "/memtor",
+        component: Memtor
+    },
+    {
+        path: "/add-memtor",
+        component: AddMemtor
+    },
+    {
+        path: "/edit-memtor",
+        component: EditMemtor
+    },
+    // Category
+    {
+        path: "/category",
+        component: Category
+    },
+    {
+        path: "/add-category",
+        component: AddCategory
+    },
+    {
+        path: "/edit-category",
+        component: EditCategory
+    },
+    // Chanllenge
+    {
+        path: "/chanllenge",
+        component: Chanllenge
+    },
+    {
+        path: "/add-chanllenge",
+        component: AddChanllenge
+    },
+    {
+        path: "/edit-chanllenge",
+        component: EditChanllenge
+    }
+    // Site
+];
+const router = new VueRouter({ routes });
 const app = new Vue({
-    el: '#app',
-});
+    el: "#app",
+    router: router
+}).$mount("#app");
