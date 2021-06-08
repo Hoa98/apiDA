@@ -26,9 +26,13 @@
                     <label for="exampleInputPhone">Phone:</label>
                     <input type="email" class="form-control" id="exampleInputPhone" placeholder="Enter phone">
                   </div> -->
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputPassword1">Password:</label>
                     <input type="password" v-model="user.password" class="form-control" name="password" placeholder="Password">
+                  </div> -->
+                  <div class="form-group">
+                    <label for="">Avatar</label>
+                    <input type="file" @change="upload($event)" class="form-control" name="avatar">
                   </div>
                    <!-- <div class="form-group">
                      <label for="exampleInputGender">Gender:</label>
@@ -65,7 +69,7 @@ import { mapGetters } from 'vuex'
 export default {
 data: function() {
 	        return {
-
+            file: ''
           }
         },
     computed: mapGetters({
@@ -76,13 +80,23 @@ data: function() {
        this.$store.dispatch('user/fetchOne',this.$route.params.id);
     },
     methods: {
+        upload(event){
+        this.file = event.target.files[0];
+        },
         updateUser () {
+        let myFormData = new FormData();
+         myFormData.append('avatar', this.file);
+         myFormData.append('username', this.user.username);
+         myFormData.append('email', this.user.email);
+         myFormData.append('id', this.user.id);
         // Submit the form.
-        this.$store.dispatch('user/editUser',this.user);
+       
+        this.$store.dispatch('user/editUser',myFormData);
 
         // Redirect home.
         this.$router.push({ name: 'users' })
         },
+      
     }
 }
 </script>

@@ -2530,6 +2530,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2645,10 +2649,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      file: ''
+    };
   },
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     user: 'user/user'
@@ -2657,9 +2667,17 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('user/fetchOne', this.$route.params.id);
   },
   methods: {
+    upload: function upload(event) {
+      this.file = event.target.files[0];
+    },
     updateUser: function updateUser() {
-      // Submit the form.
-      this.$store.dispatch('user/editUser', this.user); // Redirect home.
+      var myFormData = new FormData();
+      myFormData.append('avatar', this.file);
+      myFormData.append('username', this.user.username);
+      myFormData.append('email', this.user.email);
+      myFormData.append('id', this.user.id); // Submit the form.
+
+      this.$store.dispatch('user/editUser', myFormData); // Redirect home.
 
       this.$router.push({
         name: 'users'
@@ -3040,12 +3058,13 @@ var actions = {
       return _this.dispatch("user/fetch");
     })["catch"]();
   },
-  editUser: function editUser(_ref4, user) {
+  editUser: function editUser(_ref4, data) {
     _objectDestructuringEmpty(_ref4);
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.user", user.id), {
-      username: user.username,
-      email: user.email
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.user", data.get('id')), data, {
+      header: {
+        'Content-Type': 'multipart/form-data'
+      }
     }).then();
   },
   addUser: function addUser(_ref5, user) {
@@ -3053,7 +3072,9 @@ var actions = {
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.user"), {
       username: user.username,
-      email: user.email
+      email: user.email,
+      password: user.password,
+      avatar: user.avatar
     }).then();
   }
 };
@@ -42811,7 +42832,9 @@ var render = function() {
                     }
                   }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-footer" }, [
@@ -42837,6 +42860,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title" }, [_vm._v("Thêm người dùng")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Avatar")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "file", name: "avatar" }
+      })
     ])
   }
 ]
@@ -42944,32 +42980,14 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                  _vm._v("Password:")
-                ]),
+                _c("label", { attrs: { for: "" } }, [_vm._v("Avatar")]),
                 _vm._v(" "),
                 _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.user.password,
-                      expression: "user.password"
-                    }
-                  ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "password",
-                    name: "password",
-                    placeholder: "Password"
-                  },
-                  domProps: { value: _vm.user.password },
+                  attrs: { type: "file", name: "avatar" },
                   on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.user, "password", $event.target.value)
+                    change: function($event) {
+                      return _vm.upload($event)
                     }
                   }
                 })

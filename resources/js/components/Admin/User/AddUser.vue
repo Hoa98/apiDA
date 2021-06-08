@@ -31,6 +31,10 @@
                     <label for="exampleInputPassword1">Password</label>
                     <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
                   </div>
+                  <div class="form-group">
+                    <label for="">Avatar</label>
+                    <input type="file" class="form-control" name="avatar">
+                  </div>
                  <!-- <div class="form-group">
                      <label for="exampleInputGender">Gender:</label>
                   </div>

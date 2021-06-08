@@ -42,19 +42,20 @@ export const actions = {
       .then(() => this.dispatch("user/fetch"))
       .catch();
   },
-  editUser({}, user) {
+  editUser({}, data) {
     axios
-      .post(route("update.user", user.id), {
-        username: user.username,
-        email: user.email
-      })
+      .post(route("update.user", data.get('id')),data,{header : {
+        'Content-Type' : 'multipart/form-data'
+      }})
       .then();
   },
   addUser({}, user) {
     axios
       .post(route("create.user"), {
         username: user.username,
-        email: user.email
+        email: user.email,
+        password: user.password,
+        avatar: user.avatar
       })
       .then();
   }
