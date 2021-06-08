@@ -3022,13 +3022,13 @@ var actions = {
   fetch: function fetch(_ref) {
     var commit = _ref.commit;
     return axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("users")).then(function (response) {
-      return commit("FETCH", response.data);
+      return commit("FETCH", response.data.data);
     })["catch"]();
   },
   fetchOne: function fetchOne(_ref2, id) {
     var commit = _ref2.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(route("show.user", id)).then(function (response) {
-      return commit("FETCH_ONE", response.data);
+      return commit("FETCH_ONE", response.data.data);
     })["catch"]();
   },
   deleteUser: function deleteUser(_ref3, id) {

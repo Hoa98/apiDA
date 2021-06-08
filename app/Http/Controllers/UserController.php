@@ -20,20 +20,20 @@ class UserController extends Controller
     }
 
     // all users
-    // public function index()
-    // {
-    //     return response()->json([
-    //         'status'=>'success',
-    //         'messege' => 'Succsess get list users',
-    //         'data' => User::all(),
-    //     ], 200);
-    // }
-
     public function index()
     {
-        return response()->json(
-             User::all());
+        return response()->json([
+            'status'=>'success',
+            'messege' => 'Succsess get list users',
+            'data' => User::all(),
+        ], 200);
     }
+
+    // public function index()
+    // {
+    //     return response()->json(
+    //          User::all());
+    // }
 
     // add user -> add user_role
     public function create(Request $request)
@@ -58,8 +58,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return response()->json($user);
-        // return response()->json(['status'=>'success','message'=>'Succsess get user','data'=>$user],200);
+        // return response()->json($user);
+        return response()->json(['status'=>'success','message'=>'Succsess get user','data'=>$user],200);
     }
 
     // update user

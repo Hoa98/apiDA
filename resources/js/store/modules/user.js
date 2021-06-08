@@ -27,13 +27,13 @@ export const actions = {
   fetch({ commit }) {
     return axios
       .get(route("users"))
-      .then(response => commit("FETCH", response.data))
+      .then(response => commit("FETCH", response.data.data))
       .catch();
   },
   fetchOne({ commit }, id) {
     axios
       .get(route("show.user", id))
-      .then(response => commit("FETCH_ONE", response.data))
+      .then(response => commit("FETCH_ONE", response.data.data))
       .catch();
   },
   deleteUser({}, id) {
