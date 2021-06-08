@@ -12,11 +12,11 @@
                 <div class="card-body">
                     <div class="form-group">
                     <label for="exampleInputName">Username:</label>
-                    <input type="text"  v-model="user.username" class="form-control" id="exampleInputName" placeholder="Enter username">
+                    <input type="text"  v-model="user.username" class="form-control" name="username" placeholder="Enter username">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email:</label>
-                    <input type="email" v-model="user.email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="email" v-model="user.email" class="form-control" name="email" placeholder="Enter email">
                   </div>
                   <!-- <div class="form-group">
                     <label for="exampleInputAddress">Address:</label>
@@ -28,7 +28,7 @@
                   </div> -->
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password:</label>
-                    <input type="password" v-model="user.password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" v-model="user.password" class="form-control" name="password" placeholder="Password">
                   </div>
                    <!-- <div class="form-group">
                      <label for="exampleInputGender">Gender:</label>

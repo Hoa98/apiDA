@@ -91,7 +91,7 @@ const routes = [
 ];
 const router = new VueRouter({
     routes,
-    mode: 'history',
+    // mode: 'history',
 });
 window.events = new Vue();
 const app = new Vue({

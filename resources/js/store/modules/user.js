@@ -45,7 +45,7 @@ export const actions = {
   editUser({}, user) {
     axios
       .post(route("update.user", user.id), {
-        name: user.name,
+        username: user.username,
         email: user.email
       })
       .then();
@@ -53,7 +53,7 @@ export const actions = {
   addUser({}, user) {
     axios
       .post(route("create.user"), {
-        name: user.name,
+        username: user.username,
         email: user.email
       })
       .then();

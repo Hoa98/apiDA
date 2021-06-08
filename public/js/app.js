@@ -2863,8 +2863,8 @@ var routes = [// -------------------Admin---------------
 } // Site
 ];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
-  routes: routes,
-  mode: 'history'
+  routes: routes // mode: 'history',
+
 });
 window.events = new vue__WEBPACK_IMPORTED_MODULE_1__.default();
 var app = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
@@ -3044,7 +3044,7 @@ var actions = {
     _objectDestructuringEmpty(_ref4);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("update.user", user.id), {
-      name: user.name,
+      username: user.username,
       email: user.email
     }).then();
   },
@@ -3052,7 +3052,7 @@ var actions = {
     _objectDestructuringEmpty(_ref5);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("create.user"), {
-      name: user.name,
+      username: user.username,
       email: user.email
     }).then();
   }
@@ -42896,7 +42896,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
-                    id: "exampleInputName",
+                    name: "username",
                     placeholder: "Enter username"
                   },
                   domProps: { value: _vm.user.username },
@@ -42928,7 +42928,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "email",
-                    id: "exampleInputEmail1",
+                    name: "email",
                     placeholder: "Enter email"
                   },
                   domProps: { value: _vm.user.email },
@@ -42960,7 +42960,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "password",
-                    id: "exampleInputPassword1",
+                    name: "password",
                     placeholder: "Password"
                   },
                   domProps: { value: _vm.user.password },
