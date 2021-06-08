@@ -69,10 +69,10 @@ Route::group(['prefix' => 'user'], function () {
     Route::delete('delete/{id}', [UserController::class, 'delete'])->name('delete.user');
 });
 
-Route::get('roles', [RoleController::class, 'index'])->name('roles');
-Route::group(['prefix' => 'role'], function () {
-    Route::post('add', [RoleController::class, 'create'])->name('create.role');
-    Route::get('{id}', [RoleController::class, 'show'])->name('show.role');
-    Route::post('update/{id}', [RoleController::class, 'update'])->name('update.role');
-    Route::delete('delete/{id}', [RoleController::class, 'delete'])->name('delete.role');
-});
+// Route::get('roles', [RoleController::class, 'index'])->name('roles');
+// Route::group(['prefix' => 'role'], function () {
+//     Route::post('add', [RoleController::class, 'create'])->name('create.role');
+//     Route::get('{id}', [RoleController::class, 'show'])->name('show.role');
+//     Route::post('update/{id}', [RoleController::class, 'update'])->name('update.role');
+//     Route::delete('delete/{id}', [RoleController::class, 'delete'])->name('delete.role');
+// });

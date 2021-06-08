@@ -25,25 +25,18 @@
                       <th style="text-align:center">ID</th>
                       <th style="text-align:center">Username</th>
                       <th style="text-align:center">Email</th>
-                      <th style="text-align:center">Address</th>
-                      <th style="text-align:center">Gender</th>
-                      <th style="text-align:center">Role</th>
-                      <th style="text-align:center">Phone</th>
-                      <th style="text-align:center"><router-link to="/admin/add-user"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
+                      <th style="text-align:center"><router-link :to="{name: 'add.users'}"><button type="button" class="btn btn-primary">Add New</button></router-link></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td style="text-align:center">183</td>
-                      <td style="text-align:center">John Doe</td>
-                      <td style="text-align:center">thai@gmail.com</td>
-                      <td style="text-align:center">thai binh</td>
-                      <td style="text-align:center">Male</td>
-                      <td style="text-align:center">Active</td>
-                      <td style="text-align:center">123456789</td>
+                    <tr v-for="user in users" :key="user.id">
+                      <td style="text-align:center">{{user.id}}</td>
+                      <td style="text-align:center">{{user.username}}</td>
+                      <td style="text-align:center">{{user.email}}</td>
                       <td style="text-align:center">
-                        <button type="button" class="btn btn-info">Update</button>
-                        <button type="button" class="btn btn-danger">Delele</button>
+                        <router-link :to="{name: 'edit.users', params: { id: user.id }}" class="btn btn-info">Edit
+                        </router-link>
+                        <button class="btn btn-danger" @click="deleteUser(user.id)">Delete</button>
                       </td>
                     </tr>
            
@@ -59,7 +52,29 @@
 
 <script>
 export default {
+        name: 'List',
+        data: function() {
+	        return {}
+        },
+       computed: {
+           users () {
+               return this.$store.state.user.users;
+           }
+        },
+        created: function () {
+            this.$store.dispatch('user/fetch');
+        },
+        methods: {
+            deleteUser: function (id) {
+	            let result = confirm('Are you sure');
 
+	            if (!result) {
+                    return;
+                }
+
+                this.$store.dispatch('user/deleteUser', id);
+            }
+        }
 }
 </script>
 

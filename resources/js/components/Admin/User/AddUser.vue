@@ -8,29 +8,30 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form @submit.prevent="addUser" @keydown="form.onKeydown($event)">
                 <div class="card-body">
                     <div class="form-group">
                     <label for="exampleInputName">Username:</label>
-                    <input type="text" class="form-control" id="exampleInputName" placeholder="Enter username">
+                   <input v-model="form.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" type="text" name="username">
+          <!-- <has-error :form="form" field="username" /> -->
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                     <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputAddress">Address:</label>
                     <input type="email" class="form-control" id="exampleInputAdress" placeholder="Enter address">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPhone">Phone:</label>
                     <input type="email" class="form-control" id="exampleInputPhone" placeholder="Enter phone">
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
                   </div>
-                 <div class="form-group">
+                 <!-- <div class="form-group">
                      <label for="exampleInputGender">Gender:</label>
                   </div>
                   <div class="form-check">
@@ -47,12 +48,12 @@
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" :loading="form.busy" class="btn btn-primary">Submit</button>
                 </div>
               </form>
             </div>
@@ -61,8 +62,24 @@
 </template>
 
 <script>
-export default {
+import Form from 'vform'
 
+export default {
+  data: () => ({
+    form: new Form({
+      username: '',
+      email: '',
+       password: ''
+    })
+  }),
+    methods: {
+        async addUser () {
+      // Submit the form.
+      await this.form.post(route('create.user'))
+
+      this.$router.push({ name: 'users' })
+    },
+    }
 }
 </script>
 
